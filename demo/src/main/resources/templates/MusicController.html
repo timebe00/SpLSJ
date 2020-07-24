@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Controller</title>
+</head>
+<body>
+    <h1>Music Controller</h1>
+    <form th:action="@{/html/MusicController/Music}" method="post">
+        <input type="submit" value="음악 재생"/>
+    </form>
+    <form th:action="@{/html/MusicController/Music}" method="post">
+        <input type="submit" value="메뉴 보기"/>
+    </form>
+    <form th:action="@{/html/MusicController/Music}" method="post">
+        <input type="submit" value="녹음"/>
+    </form>
+    <form th:action="@{/html/MusicController/test}" method="get">
+        <input type="submit" value="테스트"/>
+    </form>
+    <form th:action="@{/html/MusicController/titles}">
+        <input type="submit" value="리스트 보기"/>
+    </form>
+    <form th:action="@{/html/MusicController/artists}">
+        <input type="submit" value="아티스트"/>
+    </form>
+    <form th:action="@{/html/MusicController/resptest}">
+        <input type="submit" value="Void응답 확인하기"/>
+    </form>
+    <form th:action="@{/html/MusicController/respstring}">
+        <input type="submit" value="String응답 확인하기"/>
+    </form>
+    <form th:action="@{/html/MusicController/respclass}">
+        <input type="submit" value="태스트 응답"/>
+    </form>
+    <form th:action="@{/html/MusicController/resplist}">
+        <input type="submit" value="태스트 리스 응답"/>
+    </form>
+    <form th:action="@{/html/MusicController/respfile}">
+        <input type="submit" value="파일 가져오기"/>
+    </form>
+</body>
+</html>
