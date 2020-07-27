@@ -38,4 +38,9 @@ public class BoardServiceImpl implements BoardService {
     public void remove(Integer boardNo) throws Exception {
         boardRepository.remove(boardNo);
     }
+
+    @Override
+    public void modify(Board boardNo) throws Exception {
+        boardRepository.modify(boardNo);
+    }
 }

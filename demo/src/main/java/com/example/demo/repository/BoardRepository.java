@@ -68,6 +68,8 @@ public class BoardRepository {
 
     public Board read(Integer boardNo) throws Exception
     {
+        //  특정한 board 번호를 가지고 번호, 제목, 내용, 저자, 등록일을 가져오는작업
+
         List<Board> results = jdbcTemplate.query(
                 "select board_no, title, content, writer, " +
                         "reg_date from board where board_no = ?",
@@ -86,6 +88,9 @@ public class BoardRepository {
                     }
                 }, boardNo
         );
+
+        //  처리한 결과가 아무것도 없다면 null 리턴하고
+        //  만약 결과가 나왔다면 처리한 결과의 첫번재 행을 리넡한다.
         return results.isEmpty() ? null : results.get(0);
     }
 
@@ -93,5 +98,11 @@ public class BoardRepository {
     {
         String query = "delete from board where board_no = ?";
         jdbcTemplate.update(query, boardNo);
+    }
+
+    public void modify(Board boardNo) throws Exception
+    {
+        String query = "update board set title = ?, content = ? where board_no = ?";
+        jdbcTemplate.update(query, boardNo.getTitle(), boardNo.getContent(), boardNo.getBoardNo());
     }
 }

@@ -40,8 +40,7 @@ public class BoardController {
     }
 
     @PostMapping("/postRegister")
-    public String postRegister(Board board, Model model)
-            throws Exception {
+    public String postRegister(Board board, Model model) throws Exception {
         log.info("postRegister()");
 
         service.register(board);
@@ -87,8 +86,40 @@ public class BoardController {
 
         return "board/success";
     }
+
+    @GetMapping("/getModify")
+    public String getModify(int boardNo, Model model) throws Exception
+    {
+        log.info("modify()");
+
+        model.addAttribute(service.read(boardNo));
+
+        return "board/modify";
+    }
+
+    @PostMapping("/postModify")
+    public String postModify(Board board, Model model) throws Exception
+    {
+        log.info("postModify()");
+
+        service.modify(board);
+
+        model.addAttribute("msg", "Modify Sucess");
+
+        return "board/success";
+    }
 }
 
+//  여태까지 MySQL과 Spring을 연도아는 방식을 파악하였다.
+//  그러므로 현재 예제를 토대로 유사한 연습문제를 작성해 보자!
+//  1. MySQL에 table를 작성한다.
+//      (Entity : ItemMaina
+//        id, pw, nickname, item, price)
+
+//  2. entity 패키지에 실제 사용할 Entity 클래스를 작성한다.
+//  3. controller 패키지에 URL을 처리할  ItmeMainController를 만든다.
+//  4. @Service에 대한 인터패이스와 구현체를 작성한다.
+//  5. @
 
 
 
