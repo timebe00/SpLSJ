@@ -66,6 +66,27 @@ public class BoardController {
         //  HTML 파
         return "board/list";
     }
+
+    @GetMapping("/read")
+    public String read(int boardNo, Model model) throws Exception
+    {
+        log.info("read()");
+
+        model.addAttribute(service.read(boardNo));
+
+        return "board/read";
+    }
+
+    @PostMapping("/remove")
+    public String remove(int boardNo, Model model) throws Exception
+    {
+        log.info("remove");
+
+        service.remove(boardNo);
+        model.addAttribute("msg","Success Delete!");
+
+        return "board/success";
+    }
 }
 
 

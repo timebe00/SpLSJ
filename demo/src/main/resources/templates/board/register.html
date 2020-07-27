@@ -4,34 +4,34 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<script type="text/javascripy"
+<script type="text/javascript"
         src="http://code.jquery.com/jquery-2.1.4.min.js">
 </script>
+<!-- select * from board;
+     decribe board-->
 <script>
-    $(document).ready(function()
-    {
-        var formObj = $("board");
+    $(document).ready(function() {
+        var formObj = $("#board");
         $("#btnRegister").on("click", function()
         {
-            formObj.attr("action", "register");
+            formObj.attr("action", "postRegister");
             formObj.attr("method", "post");
             formObj.submit();
         });
 
         $("#btnList").on("click", function()
         {
-            self.loction = "list";
+            self.location = "list";
         });
     });
-
 </script>
 <body>
 <!-- th:action="@" URL 링킹
      th:object="$" 객체 링-->
 <h2>Register</h2>
-<form id = "board" action="board/success.html"
+<form id="board" action="board/success.html"
       th:action="@{register}"
-      th:object="${board}" method=""post>
+      th:object="${board}" method="post">
     <table>
         <tr>
             <td>Title</td>
@@ -65,7 +65,6 @@
         </tr>
     </table>
 </form>
-
     <div>
         <button type="submit" id="btnRegister">Register</button>
         <button type="submit" id="btnList">List</button>
