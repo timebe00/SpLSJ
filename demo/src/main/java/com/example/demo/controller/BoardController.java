@@ -33,8 +33,10 @@ public class BoardController {
     private BoardService service;
 
     @GetMapping("/getRegister")
-    public void getRegister(Board board, Model model) throws Exception {
+    public String getRegister(Board board, Model model) throws Exception {
         log.info("getRegister()");
+
+        return "board/register";
     }
 
     @PostMapping("/postRegister")
@@ -50,15 +52,18 @@ public class BoardController {
 
         return "board/success";
     }
-
+    //  URL 맵핑
     @GetMapping("/list")
     public String list(Model model) throws Exception {
         log.info("list()");
 
+        //  속성추가(이름: List)일
+        //  Controller -> Service -> Repository 방식으로
+        //  동작하게 설계되어 있다.
         model.addAttribute(
                 "list",
                 service.list());
-
+        //  HTML 파
         return "board/list";
     }
 }
