@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:b-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/vueMain.css" rel="stylesheet">
+</head>
+<body>
+    <h2>Vue Index Page</h2>
+    <div id="app">
+        <h3>{{ message }}</h3>
+        <p>{{ message.length }}</p>
+        <p>{{ list[2] }}</p>
+        <p>{{ list[num] }}</p>
+        <ol>
+            <li v-for="item in list">{{ item }}</li>
+        </ol>
+        <button v-on:click="handleClick">Click</button>
+        <input v-model="initMsg">
+        <p>{{ initMsg }}</p>
+        <button v-on:click="show=!show">Change</button>
+        <transition>
+            <p v-if="show">Show Time!</p>
+        </transition>
+        <p>{{ count }} 번 클릭했다!</p>
+        <button v-on:click="increment">Count</button>
+        <button v-on:click="isActive=!isActive">
+            Change Mode
+        </button>
+        <p v-bind:class="{ child: isChild, 'is-active': isActive }"
+           class="item">
+            Dynamic Class
+        </p>
+        <p v-bind:style="{ color: textColor, backgroundColor: bgColor }"
+           class="item">
+            Dynamic Style
+        </p>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <circle v-bind:r="radius" fill="lightblue" cx="100" cy="75"/>
+        </svg>
+        <input type="range" min="0" max="100" v-model="radius"/><br/>
+        <input v-model="monsterName"/>
+        <!-- Vue는 객체의 변화를 감지하면 HTML을 다시 렌더링한다. -->
+        <button v-on:click="addMonster">Add Monster</button>
+        <ul>
+            <li v-for="(item, index) in monster"
+                v-bind:key="item.id" v-if="item.hp">
+                Id.{{ item.id }} Name.{{ item.name }} Hp.{{ item.hp }}
+                <span v-if="item.hp > 300">Strong</span>
+                <span v-if="item.hp < 50">Morbidity</span>
+                <span v-elif="item.hp < item.hp / 2">Morbidity</span>
+                <button v-on:click="doRemove(index)">Delete Monster</button>
+                <button v-on:click="doAttack(index)">Attack</button>
+
+            </li>
+        </ul>
+
+        <ul>
+            <ol v-for="(user, index) in character">
+                Id.{{ user.id }} Level.{{ user.level }}<br/>
+                State.{{ user.state }} Hp.{{ user.hp }}<br/>
+                ATK.{{ user.atk }} DEF.{{ user.def }}<br/>
+                Point.{{ user.point }}/{{ user.max }}
+            </ol>
+        </ul>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10"></script>
+<script>
+    var app = new Vue ({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js',
+            initMsg: 'Initial Message',
+            list: ['apple', 'banana', 'cherry'],
+            show: true,
+            num: 1,
+            count: 0,
+            isActive: true,
+            isChild: true,
+            textColor: 'red',
+            bgColor: 'green',
+            radius:50,
+            monster: [
+                { id:1, name:'Slime', hp:10, max:10},
+                { id:2, name:'Goblin', hp:20, max:20},
+                { id:3, name:'Dragon', hp:5000, max:5000}
+            ],
+            monsterName: 'Chimera',
+            character:[{id:'A', level:50, state:'none', hp:3000, atk:10, def:50, point:156, max:789}]
+        },
+        methods: {
+            handleClick: function(event) {
+            alert(event.target)
+            },
+            increment: function() {
+                this.count += 1
+            },
+            addMonster: function() {
+                var max = this.monster.reduce(function(a, b) {
+                    return a > b.id ? a : b.id
+                }, 0)
+                this.monster.push({
+                    id: max + 1,
+                    name: this.monsterName,
+                    hp: 2000,
+                    max: 2000
+                })
+            },
+            doRemove: function(index) {
+                this.monster.splice(index,1)
+            },
+            doAttack: function(index)
+            {
+                this.monster[index].hp -= this.character[0].atk;
+                if(this.monster[index].hp <= 0)
+                {
+                    if(this.monster[index].max > 10)
+                    {
+                        if(this.monster[index].max > 20)
+                        {
+                            if(this.monster[index].max > 2000)
+                            {
+                                this.character[0].point = this.character[0].point + 10000
+                            }
+                            this.character[0].point = this.character[0].point + 1000
+                        }
+                        this.character[0].point = this.character[0].point + 1000
+                    }
+                    this.character[0].point = this.character[0].point + 10
+                    while(this.character[0].point >= this.character[0].max)
+                    {
+                        this.character[0].point -= this.character[0].max
+                        this.character[0].level += 1
+                        this.character[0].max *= 2
+                        this.character[0].atk += 50
+                    }
+                }
+            }
+        },
+        //  시작할때 동작 1
+        beforeCreate: function () {
+            alert('Before Create: ' + this.monster)
+        },
+        //  시작할때 동작 2
+        created: function () {
+            alert('Created: ' + this.monster)
+        },
+        //  시작할때 동작 3
+        beforeMount: function () {
+            alert('Before Mount: ' + this.monster)
+        },
+        //  시작할때 동작 4
+        mounted: function () {
+            alert('Mounted: ' + this.monster)
+        },
+        //  패이지 화면이 변했을때 1
+        // Vue 객체에 변화가 발생했을때 다시 렌더링(그림 그리기)
+        beforeUpdate: function () {
+            alert('Before Update: ' + this.monster)
+<!--            var i-->
+<!--            for(i = 0; i< ths. monster.length; i++)-->
+<!--            {-->
+<!--                if(this.monster[i].hp <= 0)-->
+<!--                {-->
+<!--                    for(var j = 0; j<this.monBook.length; j++)-->
+<!--                    {-->
+<!--                        if(this.monster[i].monsterName == this.monBook[j].monsterName)-->
+<!--                        {-->
+<!--                            this.-->
+<!--                        }-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+        },
+        //  패이지 화면이 변했을때 2
+        updated: function () {
+            alert('Updated: ' + this.monster)
+        },
+        beforeDestroy: function () {
+            alert('Before Destroy: ' + this.monster)
+        },
+        destroyed: function () {
+            alert('Destroyed: ' + this.monster)
+        }
+    })
+</script>
+</body>
+</html>
