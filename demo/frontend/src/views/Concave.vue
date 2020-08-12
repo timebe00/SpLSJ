@@ -48,16 +48,10 @@ export default {
         ['', '', ''],
         ['', '', ''],
         ['', '', '']
-      ],
-      this.Ocounter = 0,
-      this.Xcounter = 0
+      ]
     },
     updateWinner: function (val) {
       this.winner = val
-    },
-    updateOXcounter: function (Ocounter, Xcounter) {
-      this.Ocounter = Ocounter
-      this.Xcounter = Xcounter
     }
   }
 }

@@ -17,6 +17,9 @@
       <router-link :to="{ name: 'Concave'}" class="nav-link" active-class="active">
               Concave
       </router-link>
+      <router-link :to="{ name: 'BoardListPage'}" class="nav-link" active-class="active">
+              Board
+      </router-link>
     </div>
     <h2>This is an Home Page</h2>
     <div id="app">

@@ -12,6 +12,8 @@ export default {
       }
     }
   },
+
+  //  아래에서 위로
   props: {
     // GlobalComponent ===> global-component
     cellData: String,

@@ -6,6 +6,12 @@ import Test from '../views/Test.vue'
 import Todo from '../views/Todo.vue'
 import Concave from '../views/Concave.vue'
 
+//  For Cafe Board
+import BoardListPage from '../views/BoardListPage.vue'
+import BoardRegisterPage from '../views/BoardRegisterPage.vue'
+import BoardModifyPage from '../views/BoardModifyPage.vue'
+import BoardReadPage from '../views/BoardReadPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -18,7 +24,7 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
-    // route level code-splitting
+    //  route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
@@ -38,6 +44,34 @@ const routes = [
     name: 'Concave',
     components: {
       default: Concave
+    }
+  },
+  {
+    path: '/board',
+    name: 'BoardListPage',
+    components: {
+      default: BoardListPage
+    }
+  },
+  {
+    path: '/board/create',
+    name: 'BoardRegisterPage',
+    components: {
+      default: BoardRegisterPage
+    }
+  },
+  {
+    path: '/board/:boardNo',
+    name: 'BoardReadPage',
+    components: {
+      default: BoardReadPage
+    }
+  },
+  {
+    path: '/board/:boardNo/edit',
+    name: 'BoardModifyPage',
+    components: {
+      default: BoardModifyPage
     }
   }
 ]
