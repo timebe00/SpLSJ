@@ -18,13 +18,13 @@ export default {
     onSubmit (payload) {
       console.log('BoardRegisterPage onSubmit()')
       const { title, content, writer } = payload
-      axios.post('http://localhost:7777/boards', { title, content, writer })
+      axios.post('http://localhost:7777/boards', { title, writer, content })
         .then(res => {
           console.log(res)
           alert('Register Success')
           this.$router.push({
             name: 'BoardReadPage',
-            params: { boardNo: res.data.boardNo }
+            params: { boardNo: res.data.boardNo.toString() }
           })
         })
         .catch(err => {

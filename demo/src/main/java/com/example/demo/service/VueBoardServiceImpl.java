@@ -19,20 +19,20 @@ public class VueBoardServiceImpl implements VuBoardService {
         repository.create(board);
     }
 
-//    @Override
-//    public VueBoard read(Long boardNo) throws Exception {
-//        //return repository.read(boardNo);
-//    }
-//
-//    @Override
-//    public void modify(VueBoard board) throws Exception {
-//        //repository.update(board);
-//    }
-//
-//    @Override
-//    public void remove(Long boardNo) throws Exception {
-//        //repository.delete(boardNo);
-//    }
+    @Override
+    public VueBoard read(Long boardNo) throws Exception {
+        return repository.read(boardNo);
+    }
+
+    @Override
+    public void modify(VueBoard board) throws Exception {
+        repository.update(board);
+    }
+
+    @Override
+    public void remove(Long boardNo) throws Exception {
+        repository.delete(boardNo);
+    }
 
     @Override
     public List<VueBoard> list() throws Exception {
