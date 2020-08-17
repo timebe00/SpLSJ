@@ -36,25 +36,24 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	//developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'mysql:mysql-connector-java'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor 'org.projectlombok:lombok'
-	compileOnly 'org.projectlombok:lombok'
-	compile group: 'commons-io', name: 'commons-io', version: '2.7'
 	compile 'org.springframework.boot:spring-boot-starter-jdbc'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.springframework.boot:spring-boot-starter-aop'
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compile 'org.hibernate:hibernate-core:5.4.17.Final'
-	compile 'org.springframework:spring-orm'
 	compile 'io.jsonwebtoken:jjwt-api:0.10.7'
 	compile 'io.jsonwebtoken:jjwt-impl:0.10.7'
 	compile 'io.jsonwebtoken:jjwt-jackson:0.10.7'
-	compile 'commeons-io:commons-io:2.6'
+	compileOnly 'org.projectlombok:lombok'
+	compile 'org.hibernate:hibernate-core:5.4.17.Final'
+	compile 'org.springframework:spring-orm'
 	compile 'com.h2database:h2'
 	compile 'org.hibernate.validator:hibernate-validator:6.0.7.Final'
-	testImplementation('org.springframework.boot:spring-boot-starter-nativeinterface.test') {
+	// developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	compile group: 'commons-io', name: 'commons-io', version: '2.7'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
@@ -94,98 +93,3 @@ model {
 }
 
 test.dependsOn 'helloSharedLibrary'
-
-
-/*
-buildscript {
-	ext{
-		springBootVersion = '2..3.1.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-		jcenter()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
-}
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'application'
-apply plugin: 'c'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-plugins {
-	id 'org.springframework.boot' version '2.3.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'java'
-	id 'eclipse'
-	id 'application'
-	id 'c'
-}
-
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
-
-repositories {
-	mavenCentral()
-	jcenter()
-}
-
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'mysql:mysql-connector-java'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	//annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-nativeinterface.test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-}
-
-nativeinterface.test {
-	useJUnitPlatform()
-	systemProperty("java.library.path",file("${buildDir}/libs/hello/shared").absolutePath)
-}
-
-model{
-	platforms{
-		x64{
-			architecture "x64"
-		}
-	}
-
-	components{
-		hello(NativeLibrarySpec){
-			binaries.all{
-				if(targetPlatform.operatingSystem.macOsX){
-					cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
-					cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/darwin"
-					cCompiler.args '-mmacosx-version-min = 10.4'
-					linker.args '-mmacosx-version-min = 10.'
-				}
-				else if(targetPlatform.operatingSystem.linux)
-				{
-					cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
-					cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/linux"
-					cCompiler.args '-D_FILE_OFFSET_BITS=64'
-				}
-			}
-		}
-	}
-}
-
-nativeinterface.test.dependsOn 'helloShareLibrary'
-
- */

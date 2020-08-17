@@ -16,14 +16,14 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                        AccessDeniedException accessDeniedException)
                         throws IOException, ServletException {
         /* Error Handlin & Info */
-        ErrorInfoApi erroprInfoApi = new ErrorInfoApi();
-        erroprInfoApi.setMessage("Access Denied");
+        ErrorInfoApi errorInfoApi = new ErrorInfoApi();
+        errorInfoApi.setMessage("Access Denied");
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String jsonString = mapper.writeValueAsString(erroprInfoApi);
+        String jsonString = mapper.writeValueAsString(errorInfoApi);
 
-        res.setContentType("application.json;charset=UTF-8");
+        res.setContentType("application/json;charset=UTF-8");
         res.setStatus(403);
         res.getWriter().write(jsonString);
     }

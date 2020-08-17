@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@JsonIgnoreProperties(value="hibernateLazyInitializer")
 @Getter
 @Setter
 @EqualsAndHashCode(of = "userNo")
@@ -22,11 +24,11 @@ import java.util.List;
 @Table(name = "member")
 public class Member {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_no")
     private Long userNo;
 
-    //  @NotBlank
+    //@NotBlank
     @Column(length = 50, nullable = false)
     private String userId;
 
@@ -45,19 +47,17 @@ public class Member {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @UpdateTimestamp
-    private Date upDate;
+    private Date updDate;
 
-    @OneToMany(cascade =  CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="user_no")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_no")
     private List<MemberAuth> authList = new ArrayList<MemberAuth>();
 
-    public void addAuth(MemberAuth auth)
-    {
+    public void addAuth(MemberAuth auth) {
         authList.add(auth);
     }
 
-    public void clearAuth() {
+    public void clearAuthList() {
         authList.clear();
     }
-
 }

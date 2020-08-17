@@ -57,7 +57,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member read(Long userNo) throws Exception {
-        log.info("Member Service read");
+        log.info("Member Service read()");
 
         return repository.getOne(userNo);
     }
@@ -69,18 +69,18 @@ public class MemberServiceImpl implements MemberService {
         memEntity.setJob(member.getJob());
 
         List<MemberAuth> memberAuthList = memEntity.getAuthList();
-        List<MemberAuth> authList = memEntity.getAuthList();
+        List<MemberAuth> authList = member.getAuthList();
 
-        for(int i = 0; i<authList.size(); i++)
-        {
+        for(int i = 0; i < authList.size(); i++) {
             MemberAuth auth = authList.get(i);
 
-            if(i < memberAuthList.size())
-            {
+            if(i < memberAuthList.size()) {
                 MemberAuth memberAuth = memberAuthList.get(i);
                 memberAuth.setAuth(auth.getAuth());
             }
         }
+
+        repository.save(memEntity);
     }
 
     @Override
@@ -90,26 +90,27 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<Member> list() throws Exception {
-        List<Object[]> valueArrays = repository.listAllMember();
+        List<Object[]> valArrays = repository.listAllMember();
         List<Member> memberList = new ArrayList<Member>();
 
-        for(Object[] valArr : valueArrays) {
+        for(Object[] valArr : valArrays) {
             Member mem = new Member();
 
             mem.setUserNo((Long) valArr[0]);
             mem.setUserId((String) valArr[1]);
             mem.setUserPw((String) valArr[2]);
-            mem.setUserName((String)valArr[3]);
-            mem.setJob((String)valArr[4]);
+            mem.setUserName((String) valArr[3]);
+            mem.setJob((String) valArr[4]);
             mem.setRegDate((Date) valArr[5]);
 
             memberList.add(mem);
         }
+
         return memberList;
     }
 
     @Override
     public long countAll() throws Exception {
-        return 0;
+        return repository.count();
     }
 }
