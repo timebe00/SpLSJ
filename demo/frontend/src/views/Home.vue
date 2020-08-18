@@ -21,6 +21,12 @@
       <router-link :to="{ name: 'BoardListPage'}" class="nav-link" active-class="active">
         Board
       </router-link>
+      <router-link :to="{ name: 'VuetifyBoard' }" class="nav-link" active-class="active">
+         VuetifyBoard
+      </router-link>
+      <router-link :to="{ name: 'VuetifyBoardListPage' }" class="nav-link" active-class="active">
+         VuetifyBoardListPage
+      </router-link>
       <h2>This is an Home Page</h2>
       <div id="app">
         {{ message }}<br>
