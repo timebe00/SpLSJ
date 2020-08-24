@@ -13,12 +13,34 @@ import {
   SET_MY_INFO,
   /* eslint-disable no-unused-vars */
   DESTROY_ACCESS_TOKEN,
-  DESTROY_MY_INFO
+  DESTROY_MY_INFO,
+  /* Crawl */
+  FINDONE,
+  FINDHOME,
+  CRAWLSTART
 } from './mutation-types'
 
 import axios from 'axios'
+import router from '../router'
 
 export default {
+  async crawlFind ({ commit }, category) {
+    axios.get('http://localhost:7777/' + `${category}`)
+      .then(({ data }) => {
+        commit('CRAWLSTART', data)
+        if (window.location.pathname !== '/CrawlCategory') {
+          router.push('/CrawlCategory')
+        }
+      })
+  },
+  async crawlFindOne ({ commit }, newsNo) {
+    axios.get('http://localhost:7777/news/' + `${newsNo}`)
+      .then(({ data }) => {
+        console.log('/news/newsNo res: ' + data)
+        commit('FINDONE', data)
+        router.push('/CrawlCategory/news')
+      })
+  },
   fetchBoardList ({ commit }) {
     return axios.get('http://localhost:7777/boards')
       .then(res => {
@@ -66,8 +88,6 @@ export default {
         commit(failGenRandNum, res)
       })
   },
-  //  context :  내부 상태정보
-  //  commit, context : 신경 ㄴㄴ
   addTodo (context, payload) {
     context.commit(ADD_TODO, payload)
   },
@@ -107,3 +127,25 @@ export default {
     commit(DESTROY_ACCESS_TOKEN)
   }
 }
+// actions: {
+//  generateRandomNumber ({ commit }) {
+//    console.log(commit)
+//
+//    axios.get('http://localhost:7777/random')
+//      .then((res) => {
+//        commit('successGenRandNum',
+//          parseInt(res.data.randNumber))
+//      })
+//      .catch((res) => {
+//        commit('failGenRandNum', res)
+//      })
+//  },
+//  addTodo (context, payload) {
+//    context.commit('ADD_TODO', payload)
+//  },
+//  removeTodo (context, payload) {
+//    context.commit('REMOVE_TODO', payload)
+//  },
+//  clearAll (context, payload) {
+//    context.commit('CLEAR_ALL')
+//  }

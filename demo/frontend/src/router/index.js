@@ -12,10 +12,18 @@ import BoardRegisterPage from '../views/BoardRegisterPage.vue'
 import BoardModifyPage from '../views/BoardModifyPage.vue'
 import BoardReadPage from '../views/BoardReadPage.vue'
 
+// For Login System
 import LoginPage from '../views/LoginPage.vue'
-import AdminSetupPAge from '../views/AdminSetupPage.vue'
+import AdminSetupPage from '../views/AdminSetupPage.vue'
+
+// Vuetify
 import VuetifyBoard from '../views/VuetifyBoard.vue'
+
+// Vuetify Board List
 import VuetifyBoardListPage from '../views/VuetifyBoardListPage.vue'
+
+// For Crawling
+import CrawlCategory from '../views/CrawlCategory.vue'
 
 Vue.use(VueRouter)
 
@@ -97,7 +105,7 @@ const routes = [
     path: '/AdminSetupPage',
     name: 'AdminSetupPage',
     components: {
-      default: AdminSetupPAge
+      default: AdminSetupPage
     }
   },
   {
@@ -112,6 +120,13 @@ const routes = [
     name: 'VuetifyBoardListPage',
     components: {
       default: VuetifyBoardListPage
+    }
+  },
+  {
+    path: '/CrawlCategory',
+    name: 'CrawlCategory',
+    components: {
+      default: CrawlCategory
     }
   }
 ]

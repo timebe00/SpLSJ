@@ -11,5 +11,11 @@ export default {
   board: null, //  개시판 각각
   //  For Login
   accessToken: '',
-  myinfo: null
+  myinfo: null,
+  //  Crawling
+  lists: [],
+  news: [],
+  homeNews: [],
+  savedNews: [],
+  savedNewsContents: []
 }
